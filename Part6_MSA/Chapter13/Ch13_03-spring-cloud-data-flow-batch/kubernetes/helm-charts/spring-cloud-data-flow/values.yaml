@@ -333,7 +333,7 @@ server:
   service:
     ## @param server.service.type Kubernetes service type
     ##
-    type: LoadBalancer
+    type: NodePort
     ## @param server.service.port Service HTTP port
     ##
     port: 8080
