@@ -256,7 +256,7 @@ spec:
           configMap:
             name: {{ include "scdf.server.configmapName" . }}
             items:
-              - key: application.yml
+              - key: application.yaml
                 path: application.yml
         {{- if .Values.waitForBackends.enabled }}
         - name: scripts

@@ -219,7 +219,7 @@ spec:
           configMap:
             name: {{ include "scdf.skipper.configmapName" . }}
             items:
-              - key: application.yml
+              - key: application.yaml
                 path: application.yml
         {{- if or (.Values.rabbitmq.enabled) (.Values.externalRabbitmq.enabled) }}
         - name: rabbitmq
