@@ -38,8 +38,8 @@ virtualService:
     - destination:
         host: istio-canary-color-svc
         subset: blue-sub
-      weight: 50
+      weight: 0
     - destination:
         host: istio-canary-color-svc
         subset: green-sub
-      weight: 50
+      weight: 100
