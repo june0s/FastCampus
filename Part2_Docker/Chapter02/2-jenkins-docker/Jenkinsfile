@@ -25,6 +25,7 @@ pipeline {
         stage('Build Docker Image by Jib & Push to Docker Repository') {
             steps {
                 sh """
+                    cd ${mainDir}
                     ./gradlew jib -Djib.to.image=${ecrUrl}/${repository}:${currentBuild.number} -Djib.console='plain'
                 """
             }
