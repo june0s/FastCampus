@@ -24,10 +24,18 @@ pipeline {
         }
         stage('Build Docker Image by Jib & Push to Docker Repository') {
             steps {
-                sh """
-                    cd ${mainDir}
-                    ./gradlew jib -Djib.to.image=${ecrUrl}/${repository}:${currentBuild.number} -Djib.console='plain'
-                """
+                script {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                        credentialsId: 'docker_credentials',
+                        usernameVariable: 'DOCKER_USER_ID',
+                        passwordVariable: 'DOCKER_USER_PASSWORD'
+                        ]])
+                    {
+                        sh "docker login -u ${DOCKER_USER_ID} -p ${DOCKER_USER_PASSWORD}"
+                        sh "cd ${mainDir}"
+                        sh "./gradlew jib -Djib.to.image=${ecrUrl}/${repository}:${currentBuild.number} -Djib.console='plain'"
+                    }
+                }
             }
         }
         stage('Deploy to VM'){
